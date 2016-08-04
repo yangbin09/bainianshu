@@ -6,7 +6,11 @@
     android:orientation="vertical">
 
   <TextView
+      android:textSize="20dp"
+      android:layout_marginLeft="10dp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:id="@+id/text"/>
+      android:id="@+id/text"
+      android:text="我是留言"
+      android:textColor="#0044cc"/>
 </LinearLayout>

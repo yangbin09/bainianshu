@@ -1,4 +1,4 @@
-package com.atyang.administrator.xuexi;
+package com.atyang.administrator.xuexi.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

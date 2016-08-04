@@ -1,12 +1,12 @@
-package com.atyang.administrator.xuexi;
+package com.atyang.administrator.xuexi.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.atyang.administrator.xuexi.R;
 import com.atyang.administrator.xuexi.data.Board;
 
 import cn.bmob.v3.exception.BmobException;

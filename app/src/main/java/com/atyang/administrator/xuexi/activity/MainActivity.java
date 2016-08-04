@@ -1,29 +1,23 @@
-package com.atyang.administrator.xuexi;
+package com.atyang.administrator.xuexi.activity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.atyang.administrator.xuexi.Adapter.MyAdapter;
+import com.atyang.administrator.xuexi.R;
 import com.atyang.administrator.xuexi.data.Board;
-import com.atyang.administrator.xuexi.data.Person;
 
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.SaveListener;
 
-public class MainActivity extends  BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     //书写留言
     private TextView write;
     //留言表列表
@@ -43,11 +37,11 @@ public class MainActivity extends  BaseActivity implements View.OnClickListener 
     /**获取数据*/
     private void data() {
         BmobQuery<Board> query = new BmobQuery<Board>();
-//查询playerName叫“比目”的数据
+        //查询playerName叫“比目”的数据
         query.addWhereEqualTo("leibie", "第一版");
-//返回50条数据，如果不加上这条语句，默认返回10条数据
+        //返回50条数据，如果不加上这条语句，默认返回10条数据
         query.setLimit(50);
-//执行查询方法
+        //执行查询方法
         query.findObjects(new FindListener<Board>() {
             @Override
             public void done(List<Board> listliuyan, BmobException e) {
@@ -67,6 +61,7 @@ public class MainActivity extends  BaseActivity implements View.OnClickListener 
     private void iniv() {
        write = (TextView) findViewById(R.id.write);
        li_main_liuyan= (ListView) findViewById(R.id.li_main_liuyan);
+        li_main_liuyan.setDivider(null);//去除listview的下划线
 
         write.setOnClickListener(this);
     }
