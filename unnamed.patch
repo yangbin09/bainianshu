@@ -1,0 +1,1193 @@
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(date 1470292236000)
++++ .gitignore	(date 1470292236000)
+@@ -0,0 +1,9 @@
++*.iml
++.gradle
++.idea
++build
++/local.properties
++.DS_Store
++/captures
++
++src/main/res/drawable/
+Index: app/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/.gitignore	(date 1470292236000)
++++ app/.gitignore	(date 1470292236000)
+@@ -0,0 +1,1 @@
++/build
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(date 1470292236000)
++++ app/build.gradle	(date 1470292236000)
+@@ -0,0 +1,31 @@
++apply plugin: 'com.android.application'
++
++android {
++    compileSdkVersion 24
++    buildToolsVersion "24.0.0"
++
++    sourceSets {
++        main.jniLibs.srcDirs = ['libs']
++    }
++
++    defaultConfig {
++        applicationId "com.atyang.administrator.xuexi"
++        minSdkVersion 18
++        targetSdkVersion 24
++        versionCode 1
++        versionName "1.0"
++    }
++    buildTypes {
++        release {
++            minifyEnabled false
++            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
++        }
++    }
++}
++
++dependencies {
++    compile fileTree(dir: 'libs', include: ['*.jar'])
++    testCompile 'junit:junit:4.12'
++    compile 'com.android.support:appcompat-v7:24.0.0'
++    compile 'com.android.support:design:24.0.0'
++}
+Index: app/proguard-rules.pro
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/proguard-rules.pro	(date 1470292236000)
++++ app/proguard-rules.pro	(date 1470292236000)
+@@ -0,0 +1,17 @@
++# Add project specific ProGuard rules here.
++# By default, the flags in this file are appended to flags specified
++# in C:\Users\Administrator\AppData\Local\Android\Sdk/tools/proguard/proguard-android.txt
++# You can edit the include path and order by changing the proguardFiles
++# directive in build.gradle.
++#
++# For more details, see
++#   http://developer.android.com/guide/developing/tools/proguard.html
++
++# Add any project specific keep options here:
++
++# If your project uses WebView with JS, uncomment the following
++# and specify the fully qualified class name to the JavaScript interface
++# class:
++#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
++#   public *;
++#}
+Index: app/src/androidTest/java/com/atyang/administrator/xuexi/ApplicationTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/androidTest/java/com/atyang/administrator/xuexi/ApplicationTest.java	(date 1470292236000)
++++ app/src/androidTest/java/com/atyang/administrator/xuexi/ApplicationTest.java	(date 1470292236000)
+@@ -0,0 +1,13 @@
++package com.atyang.administrator.xuexi;
++
++import android.app.Application;
++import android.test.ApplicationTestCase;
++
++/**
++ * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
++ */
++public class ApplicationTest extends ApplicationTestCase<Application> {
++    public ApplicationTest() {
++        super(Application.class);
++    }
++}
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(date 1470292236000)
++++ app/src/main/AndroidManifest.xml	(date 1470292236000)
+@@ -0,0 +1,43 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.atyang.administrator.xuexi">
++
++    <!--允许联网 -->
++    <uses-permission android:name="android.permission.INTERNET" />
++    <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
++    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
++    <!--获取wifi网络状态的信息 -->
++    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
++    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
++    <uses-permission android:name="android.permission.WAKE_LOCK" />
++    <!--获取sd卡写的权限，用于文件上传和下载-->
++    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
++    <!--允许读取手机状态 用于创建BmobInstallation-->
++    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
++
++    <application
++        android:allowBackup="true"
++        android:icon="@mipmap/ic_launcher"
++        android:label="@string/app_name"
++        android:theme="@style/AppTheme"
++      >
++        <activity android:name=".MainActivity"
++            >
++            <intent-filter>
++                <action android:name="android.intent.action.MAIN" />
++
++                <category android:name="android.intent.category.LAUNCHER" />
++
++            </intent-filter>
++        </activity>
++        <activity
++            android:name=".BaseActivity"
++            android:label="@string/title_activity_base"
++            android:theme="@style/AppTheme.NoActionBar"></activity>
++        <activity
++            android:name=".xieliuyanActivity">
++
++        </activity>
++    </application>
++
++</manifest>
+\ No newline at end of file
+Index: app/src/main/java/com/atyang/administrator/xuexi/Adapter/MyAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/atyang/administrator/xuexi/Adapter/MyAdapter.java	(date 1470292236000)
++++ app/src/main/java/com/atyang/administrator/xuexi/Adapter/MyAdapter.java	(date 1470292236000)
+@@ -0,0 +1,63 @@
++package com.atyang.administrator.xuexi.Adapter;
++
++import android.app.Activity;
++import android.content.Context;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.BaseAdapter;
++import android.widget.TextView;
++
++import com.atyang.administrator.xuexi.BaseActivity;
++import com.atyang.administrator.xuexi.R;
++import com.atyang.administrator.xuexi.data.Board;
++
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * 展现留言板数据的一个adapter
++ * Created by Administrator on 2016/7/18.
++ */
++public class MyAdapter extends BaseAdapter {
++    Context activity;
++    List<Board> list=new ArrayList<>();
++
++    public MyAdapter(Context context, List<Board> list) {
++        this.activity=context;
++        this.list=list;
++    }
++
++    @Override
++    public int getCount() {
++        return list.size();
++    }
++
++    @Override
++    public Object getItem(int i) {
++        return null;
++    }
++
++    @Override
++    public long getItemId(int i) {
++        return 0;
++    }
++
++    @Override
++    public View getView(int position, View convertView, ViewGroup viewGroup) {
++        ViewHolder holder = null;
++                if (convertView == null) {
++                    convertView = View.inflate(activity,R.layout.iteml,null);
++                    holder = new ViewHolder();
++                          holder.textView = (TextView)convertView.findViewById(R.id.text);
++                          convertView.setTag(holder);
++                } else {
++                            holder = (ViewHolder)convertView.getTag();
++                        }
++                   holder.textView.setText( list.get(position).getMdatacontent());
++        return convertView;
++    }
++}
++
++class  ViewHolder{
++     TextView textView;
++}
+\ No newline at end of file
+Index: app/src/main/java/com/atyang/administrator/xuexi/BaseActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/atyang/administrator/xuexi/BaseActivity.java	(date 1470292236000)
++++ app/src/main/java/com/atyang/administrator/xuexi/BaseActivity.java	(date 1470292236000)
+@@ -0,0 +1,39 @@
++package com.atyang.administrator.xuexi;
++
++import android.annotation.SuppressLint;
++import android.app.Activity;
++import android.os.Bundle;
++import android.support.design.widget.FloatingActionButton;
++import android.support.design.widget.Snackbar;
++import android.support.v7.app.AppCompatActivity;
++import android.support.v7.widget.Toolbar;
++import android.view.View;
++import android.view.Window;
++
++import cn.bmob.v3.Bmob;
++
++public class BaseActivity extends Activity {
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++
++        super.onCreate(savedInstanceState);
++
++        //第一：默认初始化
++        Bmob.initialize(this, "51fc6884c15aa2da51c249204e2735b1");
++
++        //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
++        //BmobConfig config =new BmobConfig.Builder(this)
++        ////设置appkey
++        //.setApplicationId("Your Application ID")
++        ////请求超时时间（单位为秒）：默认15s
++        //.setConnectTimeout(30)
++        ////文件分片上传时每片的大小（单位字节），默认512*1024
++        //.setUploadBlockSize(1024*1024)
++        ////文件的过期时间(单位为秒)：默认1800s
++        //.setFileExpiration(2500)
++        //.build();
++        //Bmob.initialize(config);
++    }
++
++}
+Index: app/src/main/java/com/atyang/administrator/xuexi/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/atyang/administrator/xuexi/MainActivity.java	(date 1470292236000)
++++ app/src/main/java/com/atyang/administrator/xuexi/MainActivity.java	(date 1470292236000)
+@@ -0,0 +1,105 @@
++package com.atyang.administrator.xuexi;
++
++import android.app.Activity;
++import android.content.Intent;
++import android.support.v7.app.AppCompatActivity;
++import android.os.Bundle;
++import android.util.Log;
++import android.view.View;
++import android.view.Window;
++import android.view.WindowManager;
++import android.widget.ListView;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import com.atyang.administrator.xuexi.Adapter.MyAdapter;
++import com.atyang.administrator.xuexi.data.Board;
++import com.atyang.administrator.xuexi.data.Person;
++
++import java.util.List;
++
++import cn.bmob.v3.BmobQuery;
++import cn.bmob.v3.exception.BmobException;
++import cn.bmob.v3.listener.FindListener;
++import cn.bmob.v3.listener.SaveListener;
++
++public class MainActivity extends  BaseActivity implements View.OnClickListener {
++    //书写留言
++    private TextView write;
++    //留言表列表
++    private ListView li_main_liuyan;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        getWindow().requestFeature(1);
++        setContentView(R.layout.activity_main);
++
++        iniv();
++
++        data();
++
++    }
++    /**获取数据*/
++    private void data() {
++        BmobQuery<Board> query = new BmobQuery<Board>();
++//查询playerName叫“比目”的数据
++        query.addWhereEqualTo("leibie", "第一版");
++//返回50条数据，如果不加上这条语句，默认返回10条数据
++        query.setLimit(50);
++//执行查询方法
++        query.findObjects(new FindListener<Board>() {
++            @Override
++            public void done(List<Board> listliuyan, BmobException e) {
++                if(e==null){
++                    MyAdapter mAdapter = new MyAdapter(MainActivity.this,listliuyan);//得到一个MyAdapter对象
++                    li_main_liuyan.setAdapter(mAdapter);//为ListView绑定Adapter
++                    Log.i("bmob","成功："+e.getMessage()+","+e.getErrorCode());
++                }else{
++                    Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
++                }
++            }
++        });
++    }
++
++    /**初始化控件*/
++    private void iniv() {
++       write = (TextView) findViewById(R.id.write);
++       li_main_liuyan= (ListView) findViewById(R.id.li_main_liuyan);
++
++        write.setOnClickListener(this);
++    }
++
++    @Override
++    public void onClick(View view) {
++        switch (view.getId()){
++            /**跳转到写留言的页面*/
++            case R.id.write:
++                Intent intent=new Intent();
++                intent.setClass(MainActivity.this, xieliuyanActivity.class);
++                startActivity(intent);
++                break;
++        }
++    }
++
++
++  /* private void ad(){
++
++       Person p2 = new Person();
++       p2.setName("lucky");
++       p2.setAddress("北京海淀");
++       p2.save(new SaveListener<String>() {
++           @Override
++           public void done(String s, BmobException e) {
++               if(e==null){
++                   Toast.makeText(MainActivity.this,"添加数据成功，返回objectId为",Toast.LENGTH_SHORT).show();
++
++               }else{
++                   Toast.makeText(MainActivity.this,"创建数据失败",Toast.LENGTH_SHORT).show();
++
++               }
++           }
++
++       });
++   }*/
++}
+Index: app/src/main/java/com/atyang/administrator/xuexi/data/Board.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/atyang/administrator/xuexi/data/Board.java	(date 1470292236000)
++++ app/src/main/java/com/atyang/administrator/xuexi/data/Board.java	(date 1470292236000)
+@@ -0,0 +1,70 @@
++package com.atyang.administrator.xuexi.data;
++
++import cn.bmob.v3.BmobObject;
++
++/**
++ * 留言板的主要的类
++ * Created by Administrator on 2016/7/18.
++ */
++public class Board extends BmobObject {
++    /**留言板内容*/
++    private String mdatacontent;
++    /**留言的人*/
++    private String mperson;
++    /**留言的时间*/
++    private String mtime;
++    /**查询的分类*/
++    private String leibie;
++
++    public String getMdatacontent() {
++        return mdatacontent;
++    }
++
++    public String getMperson() {
++        return mperson;
++    }
++
++    public String getMtime() {
++        return mtime;
++    }
++
++    public void setMdatacontent(String mdatacontent) {
++        this.mdatacontent = mdatacontent;
++    }
++
++    public void setMperson(String mperson) {
++        this.mperson = mperson;
++    }
++
++    public String getLeibie() {
++        return leibie;
++    }
++
++    public void setLeibie(String leibie) {
++        this.leibie = leibie;
++    }
++
++    public void setMtime(String mtime) {
++        this.mtime = mtime;
++    }
++
++    public Board() {
++    }
++
++    public Board(String mdatacontent, String mperson, String mtime, String leibie) {
++        this.mdatacontent = mdatacontent;
++        this.mperson = mperson;
++        this.mtime = mtime;
++        this.leibie = leibie;
++    }
++
++    @Override
++    public String toString() {
++        return "Board{" +
++                "mdatacontent='" + mdatacontent + '\'' +
++                ", mperson='" + mperson + '\'' +
++                ", mtime='" + mtime + '\'' +
++                ", leibie='" + leibie + '\'' +
++                '}';
++    }
++}
+Index: app/src/main/java/com/atyang/administrator/xuexi/data/Person.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/atyang/administrator/xuexi/data/Person.java	(date 1470292236000)
++++ app/src/main/java/com/atyang/administrator/xuexi/data/Person.java	(date 1470292236000)
+@@ -0,0 +1,24 @@
++package com.atyang.administrator.xuexi.data;
++
++import cn.bmob.v3.BmobObject;
++
++/**
++ * Created by Administrator on 2016/7/18.
++ */
++public class Person extends BmobObject {
++    private String name;
++    private String address;
++
++    public String getName() {
++        return name;
++    }
++    public void setName(String name) {
++        this.name = name;
++    }
++    public String getAddress() {
++        return address;
++    }
++    public void setAddress(String address) {
++        this.address = address;
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/atyang/administrator/xuexi/xieliuyanActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/atyang/administrator/xuexi/xieliuyanActivity.java	(date 1470292236000)
++++ app/src/main/java/com/atyang/administrator/xuexi/xieliuyanActivity.java	(date 1470292236000)
+@@ -0,0 +1,76 @@
++package com.atyang.administrator.xuexi;
++
++import android.app.Activity;
++import android.os.Bundle;
++import android.view.View;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.Toast;
++
++import com.atyang.administrator.xuexi.data.Board;
++
++import cn.bmob.v3.exception.BmobException;
++import cn.bmob.v3.listener.SaveListener;
++
++/**
++ * Created by Administrator on 2016/7/18.
++ */
++public class xieliuyanActivity extends BaseActivity implements View.OnClickListener{
++
++    private EditText liuyan;
++    private Button submit;
++
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        getWindow().requestFeature(1);
++        setContentView(R.layout.activity_liuyan);
++        iniv();
++    }
++
++    /**初始化控件*/
++    private void iniv() {
++        liuyan= (EditText) findViewById(R.id.liuyan);
++        submit= (Button) findViewById(R.id.submit);
++        submit.setOnClickListener(this);
++    }
++
++    @Override
++    public void onClick(View view) {
++        switch (view.getId()){
++            case R.id.submit:
++
++                uploading();
++                break;
++        }
++    }
++
++    /**
++     * 上传留言
++     */
++    private void uploading() {
++      Board db=new Board();
++        //设置留言板内容
++        db.setMdatacontent(liuyan.getText().toString());
++        //设置留言的人
++        db.setMperson("amdmin");
++        //设置留言的时间
++        db.setMtime("asdsa");
++        /**设置类别*/
++        db.setLeibie("第一版");
++        db.save(new SaveListener<String>() {
++            @Override
++            public void done(String s, BmobException e) {
++                if(e==null){
++                    Toast.makeText(xieliuyanActivity.this,"添加数据成功，返回objectId为",Toast.LENGTH_SHORT).show();
++
++                }else{
++                    Toast.makeText(xieliuyanActivity.this,"创建数据失败",Toast.LENGTH_SHORT).show();
++
++                }
++            }
++
++        });
++    }
++}
+Index: app/src/main/res/layout/activity_base.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_base.xml	(date 1470292236000)
++++ app/src/main/res/layout/activity_base.xml	(date 1470292236000)
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="40dp"
++        android:background="#0044cc"
++        android:gravity="center">
++        <TextView
++            android:textSize="20sp"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:textColor="#ffffff"
++            android:text="留  言  墙"/>
++
++    </LinearLayout>
++</LinearLayout>
+Index: app/src/main/res/layout/activity_liuyan.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_liuyan.xml	(date 1470292236000)
++++ app/src/main/res/layout/activity_liuyan.xml	(date 1470292236000)
+@@ -0,0 +1,37 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical">
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="40dp"
++        android:background="#0044cc"
++        android:gravity="center"
++        android:orientation="horizontal">
++
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="写  留  言"
++            android:textColor="#ffffff"
++            android:textSize="20sp" />
++
++    </LinearLayout>
++
++    <EditText
++        android:id="@+id/liuyan"
++        android:layout_width="match_parent"
++        android:layout_height="0dp"
++        android:layout_weight="1" />
++
++    <Button
++        android:id="@+id/submit"
++        android:layout_width="match_parent"
++        android:layout_height="40dp"
++        android:text="提交" />
++
++
++</LinearLayout>
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(date 1470292236000)
++++ app/src/main/res/layout/activity_main.xml	(date 1470292236000)
+@@ -0,0 +1,49 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical">
++
++   <LinearLayout
++       android:layout_width="match_parent"
++       android:layout_height="40dp"
++       android:background="#0044cc"
++       android:orientation="horizontal"
++       android:gravity="center">
++       <TextView
++           android:layout_width="0dp"
++           android:layout_weight="1"
++           android:layout_height="wrap_content"
++           />
++       <TextView
++           android:textSize="20sp"
++           android:layout_width="wrap_content"
++           android:layout_height="wrap_content"
++           android:textColor="#ffffff"
++           android:text="留  言  墙"/>
++
++       <TextView
++           android:layout_width="0dp"
++           android:layout_weight="0.7"
++           android:layout_height="wrap_content"
++           />
++
++       <TextView
++           android:id="@+id/write"
++           android:gravity="center"
++           android:layout_width="wrap_content"
++           android:layout_height="match_parent"
++           android:layout_marginRight="8dp"
++           android:textColor="#ffffff"
++           android:text="写留言"/>
++
++   </LinearLayout>
++
++    <ListView
++        android:id="@+id/li_main_liuyan"
++        android:layout_width="wrap_content"
++        android:layout_height="match_parent">
++
++    </ListView>
++</LinearLayout>
+Index: app/src/main/res/layout/iteml.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/iteml.xml	(date 1470292236000)
++++ app/src/main/res/layout/iteml.xml	(date 1470292236000)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical">
++
++  <TextView
++      android:layout_width="wrap_content"
++      android:layout_height="wrap_content"
++      android:id="@+id/text"/>
++</LinearLayout>
+Index: app/src/main/res/values-v21/styles.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-v21/styles.xml	(date 1470292236000)
++++ app/src/main/res/values-v21/styles.xml	(date 1470292236000)
+@@ -0,0 +1,9 @@
++<resources>
++
++    <style name="AppTheme.NoActionBar">
++        <item name="windowActionBar">false</item>
++        <item name="windowNoTitle">true</item>
++        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
++        <item name="android:statusBarColor">@android:color/transparent</item>
++    </style>
++</resources>
+Index: app/src/main/res/values-w820dp/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-w820dp/dimens.xml	(date 1470292236000)
++++ app/src/main/res/values-w820dp/dimens.xml	(date 1470292236000)
+@@ -0,0 +1,6 @@
++<resources>
++    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
++         (such as screen margins) for screens with more than 820dp of available width. This
++         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
++    <dimen name="activity_horizontal_margin">64dp</dimen>
++</resources>
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/colors.xml	(date 1470292236000)
++++ app/src/main/res/values/colors.xml	(date 1470292236000)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <color name="colorPrimary">#3F51B5</color>
++    <color name="colorPrimaryDark">#303F9F</color>
++    <color name="colorAccent">#FF4081</color>
++</resources>
+Index: app/src/main/res/values/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/dimens.xml	(date 1470292236000)
++++ app/src/main/res/values/dimens.xml	(date 1470292236000)
+@@ -0,0 +1,6 @@
++<resources>
++    <!-- Default screen margins, per the Android Design guidelines. -->
++    <dimen name="activity_horizontal_margin">16dp</dimen>
++    <dimen name="activity_vertical_margin">16dp</dimen>
++    <dimen name="fab_margin">16dp</dimen>
++</resources>
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(date 1470292236000)
++++ app/src/main/res/values/strings.xml	(date 1470292236000)
+@@ -0,0 +1,4 @@
++<resources>
++    <string name="app_name">xuexi</string>
++    <string name="title_activity_base">BaseActivity</string>
++</resources>
+Index: app/src/main/res/values/styles.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/styles.xml	(date 1470292236000)
++++ app/src/main/res/values/styles.xml	(date 1470292236000)
+@@ -0,0 +1,25 @@
++<resources>
++
++    <!-- Base application theme. -->
++    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
++        <!-- Customize your theme here. -->
++        <item name="colorPrimary">@color/colorPrimary</item>
++        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
++        <item name="colorAccent">@color/colorAccent</item>
++    </style>
++
++    <style name="AppTheme.NoActionBar">
++        <item name="windowActionBar">false</item>
++        <item name="windowNoTitle">true</item>
++    </style>
++
++    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
++
++    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
++
++    <style name="FullScreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
++        <!-- Customize your theme here. -->
++        <item name="android:windowFullscreen">true</item>
++    </style>
++
++</resources>
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(date 1470292236000)
++++ build.gradle	(date 1470292236000)
+@@ -0,0 +1,24 @@
++// Top-level build file where you can add configuration options common to all sub-projects/modules.
++
++buildscript {
++    repositories {
++        jcenter()
++    }
++    dependencies {
++        classpath 'com.android.tools.build:gradle:2.1.2'
++
++        // NOTE: Do not place your application dependencies here; they belong
++        // in the individual module build.gradle files
++    }
++}
++
++
++allprojects {
++    repositories {
++        jcenter()
++    }
++}
++
++task clean(type: Delete) {
++    delete rootProject.buildDir
++}
+Index: gradle.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>GBK
+===================================================================
+--- gradle.properties	(date 1470292236000)
++++ gradle.properties	(date 1470292236000)
+@@ -0,0 +1,18 @@
++# Project-wide Gradle settings.
++
++# IDE (e.g. Android Studio) users:
++# Gradle settings configured through the IDE *will override*
++# any settings specified in this file.
++
++# For more details on how to configure your build environment visit
++# http://www.gradle.org/docs/current/userguide/build_environment.html
++
++# Specifies the JVM arguments used for the daemon process.
++# The setting is particularly useful for tweaking memory settings.
++# Default value: -Xmx10248m -XX:MaxPermSize=256m
++# org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
++
++# When configured, Gradle will run in incubating parallel mode.
++# This option should only be used with decoupled projects. More details, visit
++# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
++# org.gradle.parallel=true
+\ No newline at end of file
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>GBK
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(date 1470292236000)
++++ gradle/wrapper/gradle-wrapper.properties	(date 1470292236000)
+@@ -0,0 +1,6 @@
++#Mon Dec 28 10:00:20 PST 2015
++distributionBase=GRADLE_USER_HOME
++distributionPath=wrapper/dists
++zipStoreBase=GRADLE_USER_HOME
++zipStorePath=wrapper/dists
++distributionUrl=https\://services.gradle.org/distributions/gradle-2.10-all.zip
+Index: gradlew
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- gradlew	(date 1470292236000)
++++ gradlew	(date 1470292236000)
+@@ -0,0 +1,160 @@
++#!/usr/bin/env bash
++
++##############################################################################
++##
++##  Gradle start up script for UN*X
++##
++##############################################################################
++
++# Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
++DEFAULT_JVM_OPTS=""
++
++APP_NAME="Gradle"
++APP_BASE_NAME=`basename "$0"`
++
++# Use the maximum available, or set MAX_FD != -1 to use that value.
++MAX_FD="maximum"
++
++warn ( ) {
++    echo "$*"
++}
++
++die ( ) {
++    echo
++    echo "$*"
++    echo
++    exit 1
++}
++
++# OS specific support (must be 'true' or 'false').
++cygwin=false
++msys=false
++darwin=false
++case "`uname`" in
++  CYGWIN* )
++    cygwin=true
++    ;;
++  Darwin* )
++    darwin=true
++    ;;
++  MINGW* )
++    msys=true
++    ;;
++esac
++
++# Attempt to set APP_HOME
++# Resolve links: $0 may be a link
++PRG="$0"
++# Need this for relative symlinks.
++while [ -h "$PRG" ] ; do
++    ls=`ls -ld "$PRG"`
++    link=`expr "$ls" : '.*-> \(.*\)$'`
++    if expr "$link" : '/.*' > /dev/null; then
++        PRG="$link"
++    else
++        PRG=`dirname "$PRG"`"/$link"
++    fi
++done
++SAVED="`pwd`"
++cd "`dirname \"$PRG\"`/" >/dev/null
++APP_HOME="`pwd -P`"
++cd "$SAVED" >/dev/null
++
++CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
++
++# Determine the Java command to use to start the JVM.
++if [ -n "$JAVA_HOME" ] ; then
++    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
++        # IBM's JDK on AIX uses strange locations for the executables
++        JAVACMD="$JAVA_HOME/jre/sh/java"
++    else
++        JAVACMD="$JAVA_HOME/bin/java"
++    fi
++    if [ ! -x "$JAVACMD" ] ; then
++        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
++
++Please set the JAVA_HOME variable in your environment to match the
++location of your Java installation."
++    fi
++else
++    JAVACMD="java"
++    which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
++
++Please set the JAVA_HOME variable in your environment to match the
++location of your Java installation."
++fi
++
++# Increase the maximum file descriptors if we can.
++if [ "$cygwin" = "false" -a "$darwin" = "false" ] ; then
++    MAX_FD_LIMIT=`ulimit -H -n`
++    if [ $? -eq 0 ] ; then
++        if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
++            MAX_FD="$MAX_FD_LIMIT"
++        fi
++        ulimit -n $MAX_FD
++        if [ $? -ne 0 ] ; then
++            warn "Could not set maximum file descriptor limit: $MAX_FD"
++        fi
++    else
++        warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
++    fi
++fi
++
++# For Darwin, add options to specify how the application appears in the dock
++if $darwin; then
++    GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""
++fi
++
++# For Cygwin, switch paths to Windows format before running java
++if $cygwin ; then
++    APP_HOME=`cygpath --path --mixed "$APP_HOME"`
++    CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
++    JAVACMD=`cygpath --unix "$JAVACMD"`
++
++    # We build the pattern for arguments to be converted via cygpath
++    ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
++    SEP=""
++    for dir in $ROOTDIRSRAW ; do
++        ROOTDIRS="$ROOTDIRS$SEP$dir"
++        SEP="|"
++    done
++    OURCYGPATTERN="(^($ROOTDIRS))"
++    # Add a user-defined pattern to the cygpath arguments
++    if [ "$GRADLE_CYGPATTERN" != "" ] ; then
++        OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"
++    fi
++    # Now convert the arguments - kludge to limit ourselves to /bin/sh
++    i=0
++    for arg in "$@" ; do
++        CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
++        CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
++
++        if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition
++            eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`
++        else
++            eval `echo args$i`="\"$arg\""
++        fi
++        i=$((i+1))
++    done
++    case $i in
++        (0) set -- ;;
++        (1) set -- "$args0" ;;
++        (2) set -- "$args0" "$args1" ;;
++        (3) set -- "$args0" "$args1" "$args2" ;;
++        (4) set -- "$args0" "$args1" "$args2" "$args3" ;;
++        (5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;
++        (6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;
++        (7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;
++        (8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;
++        (9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;
++    esac
++fi
++
++# Split up the JVM_OPTS And GRADLE_OPTS values into an array, following the shell quoting and substitution rules
++function splitJvmOpts() {
++    JVM_OPTS=("$@")
++}
++eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS
++JVM_OPTS[${#JVM_OPTS[*]}]="-Dorg.gradle.appname=$APP_BASE_NAME"
++
++exec "$JAVACMD" "${JVM_OPTS[@]}" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+Index: gradlew.bat
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- gradlew.bat	(date 1470292236000)
++++ gradlew.bat	(date 1470292236000)
+@@ -0,0 +1,90 @@
++@if "%DEBUG%" == "" @echo off
++@rem ##########################################################################
++@rem
++@rem  Gradle startup script for Windows
++@rem
++@rem ##########################################################################
++
++@rem Set local scope for the variables with windows NT shell
++if "%OS%"=="Windows_NT" setlocal
++
++@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
++set DEFAULT_JVM_OPTS=
++
++set DIRNAME=%~dp0
++if "%DIRNAME%" == "" set DIRNAME=.
++set APP_BASE_NAME=%~n0
++set APP_HOME=%DIRNAME%
++
++@rem Find java.exe
++if defined JAVA_HOME goto findJavaFromJavaHome
++
++set JAVA_EXE=java.exe
++%JAVA_EXE% -version >NUL 2>&1
++if "%ERRORLEVEL%" == "0" goto init
++
++echo.
++echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
++echo.
++echo Please set the JAVA_HOME variable in your environment to match the
++echo location of your Java installation.
++
++goto fail
++
++:findJavaFromJavaHome
++set JAVA_HOME=%JAVA_HOME:"=%
++set JAVA_EXE=%JAVA_HOME%/bin/java.exe
++
++if exist "%JAVA_EXE%" goto init
++
++echo.
++echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
++echo.
++echo Please set the JAVA_HOME variable in your environment to match the
++echo location of your Java installation.
++
++goto fail
++
++:init
++@rem Get command-line arguments, handling Windowz variants
++
++if not "%OS%" == "Windows_NT" goto win9xME_args
++if "%@eval[2+2]" == "4" goto 4NT_args
++
++:win9xME_args
++@rem Slurp the command line arguments.
++set CMD_LINE_ARGS=
++set _SKIP=2
++
++:win9xME_args_slurp
++if "x%~1" == "x" goto execute
++
++set CMD_LINE_ARGS=%*
++goto execute
++
++:4NT_args
++@rem Get arguments from the 4NT Shell from JP Software
++set CMD_LINE_ARGS=%$
++
++:execute
++@rem Setup the command line
++
++set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
++
++@rem Execute Gradle
++"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
++
++:end
++@rem End local scope for the variables with windows NT shell
++if "%ERRORLEVEL%"=="0" goto mainEnd
++
++:fail
++rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
++rem the _cmd.exe /c_ return code!
++if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
++exit /b 1
++
++:mainEnd
++if "%OS%"=="Windows_NT" endlocal
++
++:omega
+Index: settings.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- settings.gradle	(date 1470292236000)
++++ settings.gradle	(date 1470292236000)
+@@ -0,0 +1,1 @@
++include ':app'
