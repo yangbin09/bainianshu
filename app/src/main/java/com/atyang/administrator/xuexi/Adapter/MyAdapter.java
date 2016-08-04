@@ -50,12 +50,15 @@ public class MyAdapter extends BaseAdapter {
                     convertView = View.inflate(activity,R.layout.iteml,null);
                     holder = new ViewHolder();
                           holder.textView = (TextView)convertView.findViewById(R.id.text);
+                    holder.tv_xie_time = (TextView)convertView.findViewById(R.id.tv_xie_time);
                           convertView.setTag(holder);
                 } else {
                             holder = (ViewHolder)convertView.getTag();
                         }
                     //显示留言列表
                    holder.textView.setText( list.get(position).getMdatacontent());
+                    //显示时间
+        holder.tv_xie_time.setText( list.get(position).getMtime());
         return convertView;
     }
 }
@@ -63,4 +66,6 @@ public class MyAdapter extends BaseAdapter {
 class  ViewHolder{
     //留言
      TextView textView;
+    //时间
+    TextView tv_xie_time;
 }
