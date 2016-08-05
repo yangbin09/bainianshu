@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     li_main_liuyan.setAdapter(mAdapter);//为ListView绑定Adapter
                     Log.i("bmob","成功："+e.getMessage()+","+e.getErrorCode());
                 }else{
-                    Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
+                    Log.i("bmob","失败失败："+e.getMessage()+","+e.getErrorCode());
 
                 }
             }
