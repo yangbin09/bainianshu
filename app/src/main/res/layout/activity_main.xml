@@ -36,7 +36,7 @@
            android:layout_height="match_parent"
            android:layout_marginRight="8dp"
            android:textColor="#ffffff"
-           android:text="写留言"/>
+           android:text="书写留言"/>
 
    </LinearLayout>
 
