@@ -1,19 +1,18 @@
-package com.atyang.administrator.xuexi.activity;
+package com.atyang.administrator.xuexi.activity.message;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atyang.administrator.xuexi.R;
 import com.atyang.administrator.xuexi.Utlis.Time;
+import com.atyang.administrator.xuexi.activity.BaseActivity;
+import com.atyang.administrator.xuexi.activity.MainActivity;
 import com.atyang.administrator.xuexi.data.Board;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -21,14 +20,13 @@ import cn.bmob.v3.listener.SaveListener;
  * Created by Administrator on 2016/7/18.
  */
 public class xieliuyanActivity extends BaseActivity implements View.OnClickListener {
-
+    //书写留言的输入框
     private EditText liuyan;
+    //确认提交的按钮
     private Button submit;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    //返回按钮
+    private TextView tv_xie_fanhui;
+
 
 
     @Override
@@ -37,9 +35,7 @@ public class xieliuyanActivity extends BaseActivity implements View.OnClickListe
         getWindow().requestFeature(1);
         setContentView(R.layout.activity_liuyan);
         iniv();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
     /**
@@ -49,14 +45,24 @@ public class xieliuyanActivity extends BaseActivity implements View.OnClickListe
         liuyan = (EditText) findViewById(R.id.liuyan);
         submit = (Button) findViewById(R.id.submit);
         submit.setOnClickListener(this);
+        tv_xie_fanhui = (TextView) findViewById(R.id.tv_xie_fanhui);
+        tv_xie_fanhui.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            //长传留言
             case R.id.submit:
 
                 uploading();
+                break;
+            //返回主页
+            case R.id.tv_xie_fanhui:
+                Intent intent=new Intent();
+                intent.setClass(xieliuyanActivity.this, MessageMain.class);
+                startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -71,17 +77,20 @@ public class xieliuyanActivity extends BaseActivity implements View.OnClickListe
         //设置留言的人
         db.setMperson("amdmin");
         //设置留言的时间
-        db.setMtime(Time.getInstance().getTime());
+       db.setMtime(Time.getInstance().getPresentTime());
+        //db.setMtime("2011-10-10 12:21");
         /**设置类别*/
-        db.setLeibie("第一版");
+        db.setLeibie("0000");
         db.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
                 if (e == null) {
-                    Toast.makeText(xieliuyanActivity.this, "添加数据成功，返回objectId为", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(xieliuyanActivity.this, "留言上传成功", Toast.LENGTH_SHORT).show();
+
+                    finish();
 
                 } else {
-                    Toast.makeText(xieliuyanActivity.this, "创建数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(xieliuyanActivity.this, "留言长传失败，请检查网络", Toast.LENGTH_SHORT).show();
 
                 }
             }

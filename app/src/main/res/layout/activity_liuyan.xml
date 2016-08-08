@@ -5,29 +5,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#0044cc"
-        android:gravity="center"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/tv_xie_fanhui"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:textColor="#ffffff"
+            android:text="返回"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="写  留  言"
             android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:text="留  言  墙"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            />
+
+
 
     </LinearLayout>
 
     <EditText
+        android:layout_margin="10dp"
         android:id="@+id/liuyan"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="100dp"
+         />
 
     <Button
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="40dp"

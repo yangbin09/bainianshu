@@ -1,49 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="40dp"
-       android:background="#0044cc"
-       android:orientation="horizontal"
-       android:gravity="center">
-       <TextView
-           android:layout_width="0dp"
-           android:layout_weight="1"
-           android:layout_height="wrap_content"
-           />
-       <TextView
-           android:textSize="20sp"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:textColor="#ffffff"
-           android:text="留  言  墙"/>
-
-       <TextView
-           android:layout_width="0dp"
-           android:layout_weight="0.7"
-           android:layout_height="wrap_content"
-           />
-
-       <TextView
-           android:id="@+id/write"
-           android:gravity="center"
-           android:layout_width="wrap_content"
-           android:layout_height="match_parent"
-           android:layout_marginRight="8dp"
-           android:textColor="#ffffff"
-           android:text="书写留言"/>
-
-   </LinearLayout>
-
-    <ListView
-        android:id="@+id/li_main_liuyan"
+    <TextView
+        android:id="@+id/txt_topbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="首页1"
+        android:textColor="@color/text_topbar"
+        android:textSize="18sp" />
 
-    </ListView>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+
+
+    <RadioGroup
+        android:id="@+id/rg_tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_white"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_channel"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_menu_channel"
+            android:text="@string/tab_menu_alert" />
+
+        <RadioButton
+            android:id="@+id/rb_message"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_menu_message"
+            android:text="@string/tab_menu_profile" />
+
+        <RadioButton
+            android:id="@+id/rb_better"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_menu_better"
+            android:text="@string/tab_menu_pay" />
+
+        <RadioButton
+            android:id="@+id/rb_setting"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_menu_setting"
+            android:text="@string/tab_menu_setting" />
+
+    </RadioGroup>
+
+
+
+
 </LinearLayout>

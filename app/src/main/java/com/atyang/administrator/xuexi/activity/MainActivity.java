@@ -1,101 +1,109 @@
 package com.atyang.administrator.xuexi.activity;
 
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ListView;
+import android.support.v4.view.ViewPager;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.atyang.administrator.xuexi.Adapter.MyAdapter;
+import com.atyang.administrator.xuexi.Adapter.MyFragmentPagerAdapter;
 import com.atyang.administrator.xuexi.R;
-import com.atyang.administrator.xuexi.data.Board;
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 
-import java.util.List;
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
+    //UI Objects
+    private TextView txt_topbar;
+    private RadioGroup rg_tab_bar;
+    private RadioButton rb_channel;
+    private RadioButton rb_message;
+    private RadioButton rb_better;
+    private RadioButton rb_setting;
+    private ViewPager vpager;
 
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
+    private MyFragmentPagerAdapter mAdapter;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
-    //书写留言
-    private TextView write;
-    //留言表列表
-    private ListView li_main_liuyan;
+    //几个代表页面的常量
+    public static final int PAGE_ONE = 0;
+    public static final int PAGE_TWO = 1;
+    public static final int PAGE_THREE = 2;
+    public static final int PAGE_FOUR = 3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(1);
         setContentView(R.layout.activity_main);
 
-        iniv();
-
-        data();
-
-    }
-    /**获取数据*/
-    private void data() {
-        BmobQuery<Board> query = new BmobQuery<Board>();
-        //查询playerName叫“比目”的数据
-        query.addWhereEqualTo("leibie", "第一版");
-        //返回50条数据，如果不加上这条语句，默认返回10条数据
-        query.setLimit(50);
-        //执行查询方法
-        query.findObjects(new FindListener<Board>() {
-            @Override
-            public void done(List<Board> listliuyan, BmobException e) {
-                if(e==null){
-                    MyAdapter mAdapter = new MyAdapter(MainActivity.this,listliuyan);//得到一个MyAdapter对象
-                    li_main_liuyan.setAdapter(mAdapter);//为ListView绑定Adapter
-                    Log.i("bmob","成功："+e.getMessage()+","+e.getErrorCode());
-                }else{
-                    Log.i("bmob","失败失败："+e.getMessage()+","+e.getErrorCode());
-
-                }
-            }
-        });
+        mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        bindViews();
+        rb_channel.setChecked(true);
     }
 
-    /**初始化控件*/
-    private void iniv() {
-       write = (TextView) findViewById(R.id.write);
-       li_main_liuyan= (ListView) findViewById(R.id.li_main_liuyan);
-        li_main_liuyan.setDivider(null);//去除listview的下划线
+    private void bindViews() {
+        txt_topbar = (TextView) findViewById(R.id.txt_topbar);
+        rg_tab_bar = (RadioGroup) findViewById(R.id.rg_tab_bar);
+        rb_channel = (RadioButton) findViewById(R.id.rb_channel);
+        rb_message = (RadioButton) findViewById(R.id.rb_message);
+        rb_better = (RadioButton) findViewById(R.id.rb_better);
+        rb_setting = (RadioButton) findViewById(R.id.rb_setting);
+        rg_tab_bar.setOnCheckedChangeListener(this);
 
-        write.setOnClickListener(this);
+        vpager = (ViewPager) findViewById(R.id.vpager);
+        vpager.setAdapter(mAdapter);
+        vpager.setCurrentItem(0);
+        vpager.addOnPageChangeListener(this);
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            /**跳转到写留言的页面*/
-            case R.id.write:
-                Intent intent=new Intent();
-                intent.setClass(MainActivity.this, xieliuyanActivity.class);
-                startActivity(intent);
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.rb_channel:
+                vpager.setCurrentItem(PAGE_ONE);
+                break;
+            case R.id.rb_message:
+                vpager.setCurrentItem(PAGE_TWO);
+                break;
+            case R.id.rb_better:
+                vpager.setCurrentItem(PAGE_THREE);
+                break;
+            case R.id.rb_setting:
+                vpager.setCurrentItem(PAGE_FOUR);
                 break;
         }
     }
 
 
-  /* private void ad(){
+    //重写ViewPager页面切换的处理方法
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
 
-       Person p2 = new Person();
-       p2.setName("lucky");
-       p2.setAddress("北京海淀");
-       p2.save(new SaveListener<String>() {
-           @Override
-           public void done(String s, BmobException e) {
-               if(e==null){
-                   Toast.makeText(MainActivity.this,"添加数据成功，返回objectId为",Toast.LENGTH_SHORT).show();
+    @Override
+    public void onPageSelected(int position) {
+    }
 
-               }else{
-                   Toast.makeText(MainActivity.this,"创建数据失败",Toast.LENGTH_SHORT).show();
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        //state的状态有三个，0表示什么都没做，1正在滑动，2滑动完毕
+        if (state == 2) {
+            switch (vpager.getCurrentItem()) {
+                case PAGE_ONE:
+                    rb_channel.setChecked(true);
+                    break;
+                case PAGE_TWO:
+                    rb_message.setChecked(true);
+                    break;
+                case PAGE_THREE:
+                    rb_better.setChecked(true);
+                    break;
+                case PAGE_FOUR:
+                    rb_setting.setChecked(true);
+                    break;
+            }
+        }
+    }
 
-               }
-           }
 
-       });
-   }*/
 }
